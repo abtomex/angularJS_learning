@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="scripts/angular.js"></script>
+</head>
+<body>
+    <div ng-app="myNgApp" ng-controller="myNgController">
+        Год рождения: <input type="number" ng-model="birthYear" />
+        <p>Возраст: <span ng-bind="getAge()"></span></p>
+        Возраст: <input type="number" ng-model="age" value="{{getAge()}}" />
+    </div>
+    <script>
+        angular.module("myNgApp", [])
+            .controller("myNgController", function ($scope) {
+
+                $scope.getAge = function () {
+                    return new Date().getFullYear() - $scope.birthYear;
+                };
+            });
+    </script>
+
+</body>
+</html>
