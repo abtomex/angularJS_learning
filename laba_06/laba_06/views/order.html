@@ -1,0 +1,20 @@
+﻿<h1>Order</h1>
+<table border="1">
+    <tr>
+        <th>Название</th>
+        <th>Цена</th>
+        <th>Количество</th>
+        <th>Сумма</th>
+    </tr>
+    <tr ng-repeat="g in goods">
+        <td>{{g.title}}</td>
+        <td>{{g.quantity}}</td>
+        <td>{{g.price}}</td>
+        <td>{{g.quantity*g.price}}</td>
+    </tr>
+    <tr>
+        <th colspan="3">Всего: </th>
+        <th>{{ getSumma()}}</th>
+
+    </tr>
+</table>

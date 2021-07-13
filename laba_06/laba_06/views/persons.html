@@ -1,0 +1,11 @@
+﻿<h1>Persons</h1>
+<table border="1">
+    <tr>
+        <th>Имя</th>
+        <th>Возраст</th>
+    </tr>
+    <tr ng-repeat=" p in persons | orderBy:'name'">
+        <td>{{p.name}}</td>
+        <td>{{p.age}}</td>
+    </tr>
+</table>
