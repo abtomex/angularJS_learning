@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="scripts/angular.min.js"></script>
+</head>
+<body ng-app="myNgApp">
+    <h1>Laba_07</h1>
+    <div ng-controller="myNgController">
+        Имя: <input type="text" ng-model="person.name">
+        Возраст: <input type="number" ng-model="person.age">
+        <input type="button" value="Save" ng-click="save()">
+    </div>
+    <script>
+        var app = angular.module("myNgApp", []);
+        app.controller("myNgController", ["$scope", "myData",
+
+            function ($scope, dal) {
+                $scope.person = dal.load();
+                $scope.save = function () {
+                    dal.store($scope.person);
+                }
+            }]);
+        app.service("myData", ["$window", function ($window) {
+            this.storageKey = "myAppData";
+            this.store = function (obj) {
+                $window.localStorage.setItem(this.storageKey, angular.toJson(obj));
+            }
+            this.load = function () {
+                var s = $window.localStorage.getItem(this.storageKey);
+                if (s) {
+                    return angular.fromJson(s);
+                } else {
+                    return { name: "", age: 0 }
+                }
+            }
+        }]);
+
+    </script>
+
+</body>
+</html>
