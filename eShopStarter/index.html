@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>eShop</title>
+    <script src="Scripts/angular.min.js"></script>
+    <script src="Scripts/angular-route.js"></script>
+    <script src="Scripts/i18n/angular-locale_ru-ru.js"></script>
+    <script src="MyScripts/myApp.js"></script>
+    <script src="MyScripts/productsCtrl.js"></script>
+    <script src="MyScripts/shoppingCartCtrl.js"></script>
+    <script src="MyScripts/shoppingCartSrv.js"></script>
+    <style>
+        table {
+            border-left: 1px solid black;
+            border-top: 1px solid black;
+        }
+
+        th, td {
+            border-right: 1px solid black;
+            border-bottom: 1px solid black;
+        }
+
+        th {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body ng-app="myApp">
+    <h1>My eShop</h1>
+    <div>
+        <nav>
+            <a href="#!main">Домашняя</a>
+            <a href="#!products">Каталог</a>
+            <a href="#!shoppingCart">Корзина</a>
+        </nav>
+        <div ng-view></div>
+    </div>
+</body>
+</html>

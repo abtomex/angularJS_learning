@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="Scripts/angular.js"></script>
+    <script src="Scripts/i18n/angular-locale_ru.js"></script>
+</head>
+<body>
+    <div ng-app="myNgApp" ng-controller="goods">
+        <input type="text" ng-model="searchLine" />
+        <table border="1">
+            <tr>
+                <th>N</th>
+                <th>Название</th>
+                <th>Цена</th>
+                <th>Количество</th>
+                <th>Сумма</th>
+            </tr>
+            <tr ng-repeat="good in goods | filter:{name: searchLine} | orderBy: 'name' ">
+                <td>{{$index+1}}</td>
+                <td ng-if="$odd" style="background-color: #DFDFDF">{{good.name}}</td>
+                <td ng-if="$even">{{good.name}}</td>
+                <td>{{good.quantity}}</td>
+                <td>{{good.price | currency}}</td>
+                <td>{{good.quantity*good.price | currency}}</td>
+            </tr>
+            <tr>
+                <th colspan="4">Всего: </th>
+                <th>{{ getSumma(goods | filter: {name:searchLine}) | currency}}</th>
+            </tr>
+        </table>
+
+
+
+    </div>
+    <script>
+        angular.module("myNgApp", [])
+            .controller("goods", function ($scope) {
+
+                $scope.goods = [
+                    { name: "Хлеб", quantity: "10", price: "25" },
+                    { name: "Колбаса", quantity: "2", price: "300" },
+                    { name: "Сыр", quantity: "3", price: "150" },
+                    { name: "Майонез", quantity: "1", price: "80" },
+                    { name: "Шашлык", quantity: "2", price: "400" }
+                ];
+                $scope.getSumma = function (goods) {
+                    var summa = 0;
+                    for (var i = 0; i < goods.length; i++) {
+                        summa += goods[i].quantity * goods[i].price;
+                    }
+                    return summa;
+                }
+            });
+        angular.module("myNgApp").filter("myReverse", function () {
+
+            return function (s) {
+                var r = "";
+                for (var i = s.length - 1; i >= 0; i--) {
+                    r += s[i];
+                }
+                return r;
+            }
+
+        })
+
+    </script>
+
+</body>
+</html>
