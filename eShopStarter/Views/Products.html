@@ -1,0 +1,20 @@
+﻿<h2>Каталог</h2>
+<div>
+    <p>Поиск товара по наименованию: <input type="search" ng-model="userSearch" /></p>
+    <table cellspacing="0" cellpadding="3">
+        <tr>
+            <th ng-click="orderBy('Id')">№</th>
+            <th ng-click="orderBy('title')">Наименование</th>
+            <th ng-click="orderBy('price')">Цена</th>
+            <th></th>
+        </tr>
+        <tr ng-repeat="p in products | filter: {title: userSearch} | orderBy: tblOrderBy: reverseOrderBy">
+            <td ng-if="$odd">{{ p.Id }}</td>
+            <td ng-if="$even" style="background-color: #DFDFDF;">{{ p.Id }}</td>
+            <td ng-if="$odd">{{ p.title }}</td>
+            <td ng-if="$even" style="background-color: #DFDFDF;">{{ p.title }}</td>
+            <td ng-if="$odd">{{ p.price | currency }}</td>
+            <td ng-if="$even" style="background-color: #DFDFDF;">{{ p.price | currency }}</td>
+            <td><input type="button" value="Добавить в корзину" ng-click="saveItem(p.Id, p)"></td>
+        </tr>
+    </table>

@@ -1,0 +1,42 @@
+﻿<h2>Корзина</h2>
+<div>
+    <table cellspacing="0" cellpadding="1">
+        <tr>
+            <th>№</th>
+            <th>Наименование</th>
+            <th>Цена</th>
+            <th>Количество</th>
+            <th>Общая стоимость</th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr ng-repeat="item in items | orderBy: 'title'">
+            <!--track by $index-->
+            <td ng-if="$odd">{{$index + 1}}</td>
+            <td ng-if="$even" style="background-color: #DFDFDF;">{{$index + 1}}</td>
+            <td ng-if="$odd">{{ item.title }}</td>
+            <td ng-if="$even" style="background-color: #DFDFDF;">{{ item.title }}</td>
+            <td ng-if="$odd">{{ item.price | currency }}</td>
+            <td ng-if="$even" style="background-color: #DFDFDF;">{{ item.price | currency }}</td>
+            <td ng-if="$odd">{{ item.quantity }}</td>
+            <td ng-if="$even" style="background-color: #DFDFDF;">{{ item.quantity }}</td>
+            <td ng-if="$odd">{{ item.totalPrice | currency }}</td>
+            <td ng-if="$even" style="background-color: #DFDFDF;">{{ item.totalPrice | currency }}</td>
+            <td><input type="button" value="+1" ng-click="addItem(item.productId, item)"></td>
+            <td><input type="button" value="-1" ng-click="removeItem(item.productId)"></td>
+            <td><input type="button" value="Удалить товар" ng-click="removeAll(item.productId)"></td>
+        </tr>
+        <tr>
+            <th colspan="5">Итого:</th>
+            <td colspan="3">{{getSum(items)}}</td>
+        </tr>
+    </table>
+    <form name="myForm">
+        <p>Ваше имя: <input type="text" name="name" ng-model="order.customer" required /><span ng-hide="myForm.name.$valid">*</span></p>
+        <p>Комментарий к заказу:<br /><textarea cols="60" rows="10" ng-model="order.comments"></textarea></p>
+        <p>
+            <input type="button" value="Оформить заказ" ng-click="makeOrder()" />
+        </p>
+    </form>
+</div>
